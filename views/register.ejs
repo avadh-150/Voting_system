@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            margin-top: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Create User</h1>
+        <form action="" method="POST">
+            <!-- Name -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <!-- Age -->
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" placeholder="Enter your age" required>
+
+            <!-- Email -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+
+            <!-- Mobile -->
+            <label for="mobile">Mobile:</label>
+            <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number">
+
+            <!-- Aadhaar -->
+            <label for="aadhaar">Aadhaar Number:</label>
+            <input type="number" id="aadhaar" name="aadhaar" placeholder="Enter your Aadhaar number" required>
+            <% if (typeof msg !== 'undefined') { %>
+                <p style="color: red;"><%= msg %></p>
+            <% } %>
+            <!-- Password -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <!-- Role -->
+            <label for="role">Role:</label>
+            <select id="role" name="role">
+                <option value="voter" selected>Voter</option>
+                <option value="admin">Admin</option>
+            </select>
+
+            <!-- isVoted -->
+            <label for="isVoted">Has Voted:</label>
+            <select id="isVoted" name="isVoted">
+                <option value="false" selected>No</option>
+                <option value="true">Yes</option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+            <div class="register-link">
+                <p>Don't have an account? <a href="/user/login">Login here</a></p>
+            </div>
+        </form>
+        <% if (typeof message != 'undefined') { %>
+            <div class="message">
+                <%= message %>
+            </div>
+                        <% } %>
+    </div>
+</body>
+
+</html>

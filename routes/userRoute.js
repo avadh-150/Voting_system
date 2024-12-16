@@ -4,8 +4,9 @@ const router = express.Router();
 const User = require('./../models/userSchema.js');
 const { middleware, genToken } = require('./../jwt.js');
 
+
 // displaying user data
-router.get('/',async (req,res)=>{
+router.get('/display',async (req,res)=>{
 
     try
     {
@@ -19,68 +20,24 @@ router.get('/',async (req,res)=>{
     console.log(err);
     res.status(500).json({ error: "internal server error"});
 }
-})
-router.post('/signup', async (req, res) => {
-    try {
-        const data = req.body;
-        // Check if there is already an admin user
-
-        const adminUser=await User.findOne({role:'admin'});
-        if(data.role == 'admin' && adminUser)
-        {
-            return res.status(400).json({ message: 'There is already an admin user' });
-        }
-        const newUser = new User(data);
-
-        const response = await newUser.save();
-
-
-        
-        // create a new payload data object
-        const payload = {
-            id: response.id,
-        };
-        const token = genToken(payload);
-        // convert data object to json
-        console.log(JSON.stringify(payload));
-        console.log("token: " + token);
-        console.log("You have successfully signed up");
-        res.status(200).json({ response: response, token: token });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ message: err.message })
-    }
 });
+
+// middleware authentication routes
+const auth=require('./../middleware/auth.js');
+
+// registration endpoint
+const UserController =require('./../controller/userController.js');
+router.get('/register',auth.logout,UserController.signupDis);
+router.post('/register',UserController.signup);
+
 
 // login route
-router.post('/login', async (req, res) => {
-    try {
+router.get('/login',auth.logout,UserController.loginDisplay);
+router.post('/login',UserController.login);
+router.get('/logout',UserController.logout);
+router.get('/dashboard',auth.login,UserController.dash);
 
-        // extract aadhaar,password from req body...
-        const { aadhaar, password } = req.body;
 
-        // match aadhaar of user
-        const aadhaarId = await User.findOne({ aadhaar: aadhaar });
-        
-        // match password of user
-        const pass = await aadhaarId.comparePassword(password);
-        if (!aadhaarId || !pass) {
-            return res.status(401).json({ message: 'Invalid aadhaar Id or password' });
-        };
-
-        const payload = {
-            id: aadhaarId.id,
-        }
-        const token = genToken(payload);
-        console.log("token: " + token);
-        res.status(200).json({ token })
-
-    }
-    catch (err) {
-        console.log(err);
-        res.status(500).json({ message: err.message });
-    }
-});
 
 // router.use(middleware)
 // user profile routes

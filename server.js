@@ -9,7 +9,8 @@ require('dotenv').config();
 
 // use as a middleware
 const bodyParser=require('body-parser');
-app.use(bodyParser.json());
+app.use(express.json());  // For parsing application/json
+app.use(express.urlencoded({ extended: true }));  // For parsing application/x-www-form-urlencoded
 POST=process.env.PORT || 3000;
 
 const middleware_func=(req,res,next)=>{
@@ -17,19 +18,27 @@ console.log(`[${new Date().toLocaleString()}] response method is ${req.originalU
 next(); 
 }
 
+//session set up
+const session=require('express-session');
+app.use(session({secret:process.env.SECRET_KEY,
+    resave:false,
+    saveUninitialized: true,
+}));
 
 app.use(middleware_func);
 
 const { middleware } = require('./jwt.js');
 
-app.get('/',(req,res)=>{    
- res.send("Hello world! and your application will be started!");   
-
-})
+app.set('view engine', 'ejs');
+app.set('views','./views');
 
 const User=require('./routes/userRoute.js');
 const candidates=require('./routes/candidateRoute.js');
 app.use('/user',User);
 app.use('/candidate',middleware,candidates);
+app.get('*',(req,res) =>{
+    res.redirect('/user/login');
 
-app.listen(POST,()=>console.log('Server created....'));
+})
+
+app.listen(POST,(err)=>console.log('Server created....'));
