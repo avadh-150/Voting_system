@@ -2,7 +2,7 @@ const login=async(req, res, next) => {
     try{
         if(req.session.user){}
             else{
-            res.rederect("/user/login");
+            res.rederect("/login");
         }
         next();
     }catch(err){
@@ -13,7 +13,7 @@ const login=async(req, res, next) => {
 const logout=async(req, res, next) => {
     try{
         if(req.session.user){
-            res.redirect("/user/dashboard");
+            res.redirect("/dashboard");
         }
         next();
     }catch(err){

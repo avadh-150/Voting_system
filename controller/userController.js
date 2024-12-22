@@ -93,7 +93,7 @@ const login = async (req, res) => {
         req.session.user = userData;
 
         // Redirect to dashboard
-        res.redirect('/user/dashboard');
+        res.redirect('/dashboard');
 
     } catch (err) {
         console.error('Error during login:', err.message);
@@ -122,7 +122,7 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
     try {
         req.session.destroy();
-        res.redirect('/user/login')
+        res.redirect('/login')
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: err.message })

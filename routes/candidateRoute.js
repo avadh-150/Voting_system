@@ -133,8 +133,11 @@ router.post('/vote/:candidateId', async (req, res) => {
     }
 });
 
+// middleware authentication routes
+const auth=require('./../middleware/auth.js');
+
 const condcont=require('./../controller/candCont.js');
-router.get('/candidate',condcont.condidate);
+router.get('/candidate',auth.login,condcont.condidate);
 
 // vote count
 router.get('/vote/count', async (req, res) => {

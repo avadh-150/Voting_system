@@ -38,11 +38,11 @@ app.set('views','./views');
 
 const User=require('./routes/userRoute.js');
 const candidates=require('./routes/candidateRoute.js');
-app.use('/user',User);
-app.use('/candidate',candidates);
-app.get('*',(req,res) =>{
-    res.redirect('/user/login');
+app.use('/',User);
+app.use('/',candidates);
+// app.get('*',(req,res) =>{
+//     res.redirect('/login');
 
-})
+// })
 
 app.listen(POST,(err)=>console.log('Server created....'));
