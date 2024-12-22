@@ -40,9 +40,9 @@ const User=require('./routes/userRoute.js');
 const candidates=require('./routes/candidateRoute.js');
 app.use('/',User);
 app.use('/',candidates);
-// app.get('*',(req,res) =>{
-//     res.redirect('/login');
+app.get('*',(req,res) =>{
+    res.redirect('/login');
 
-// })
+})
 
 app.listen(POST,(err)=>console.log('Server created....'));
