@@ -133,22 +133,8 @@ router.post('/vote/:candidateId', async (req, res) => {
     }
 });
 
-// display the conditions
-router.get('/',async (req,res)=>{
-
-    try
-    {
-        const data=await candidate.find();
-
-    console.log("The list of candidates");
-    res.status(200).json({ data: data });
-    
-    }catch (err) {
-    
-    console.log(err);
-    res.status(500).json({ error: "internal server error"});
-}
-})
+const condcont=require('./../controller/candCont.js');
+router.get('/candidate',condcont.condidate);
 
 // vote count
 router.get('/vote/count', async (req, res) => {

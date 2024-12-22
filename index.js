@@ -18,6 +18,10 @@ console.log(`[${new Date().toLocaleString()}] response method is ${req.originalU
 next(); 
 }
 
+//static folder path
+app.use(express.static('public'));
+
+
 //session set up
 const session=require('express-session');
 app.use(session({secret:process.env.SECRET_KEY,
@@ -35,7 +39,7 @@ app.set('views','./views');
 const User=require('./routes/userRoute.js');
 const candidates=require('./routes/candidateRoute.js');
 app.use('/user',User);
-app.use('/candidate',middleware,candidates);
+app.use('/candidate',candidates);
 app.get('*',(req,res) =>{
     res.redirect('/user/login');
 

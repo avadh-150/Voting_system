@@ -41,21 +41,21 @@ router.get('/dashboard',auth.login,UserController.dash);
 
 // router.use(middleware)
 // user profile routes
-router.get('/profile',middleware, async (req, res) => {
-    try {
+// router.get('/profile',middleware, async (req, res) => {
+//     try {
 
-        const data = req.user;
-        console.log("the user data is; ",data);
+//         const data = req.user;
+//         console.log("the user data is; ",data);
 
-        const id = data.id;
-        const user = await User.findById(id);
-        res.status(200).json(user);
+//         const id = data.id;
+//         const user = await User.findById(id);
+//         res.status(200).json(user);
 
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ message: err.message });
-    }
-});
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json({ message: err.message });
+//     }
+// });
 
 router.put('/profile/password', middleware, async (req, res) => {
     try {

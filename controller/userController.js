@@ -131,7 +131,8 @@ const logout = async (req, res) => {
 
 const dash = async (req, res) => {
     try {
-        res.render('dashboard', { user: req.session.user });
+        const users= await User.findOne({_id:req.session.user._id})
+        res.render('dashboard', { user: req.session.user,users:users });
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: err.message })
