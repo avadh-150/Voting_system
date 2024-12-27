@@ -35,8 +35,12 @@ const candidateSchema = new mongoose.Schema({
     {
         type: Number,
         default:0
+    },
+    image:
+    {
+        type: String,
+        required: true
     }
-    
 });
 
 module.exports = mongoose.model('candidate', candidateSchema);

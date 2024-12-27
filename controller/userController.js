@@ -38,7 +38,7 @@ const signup = async (req, res) => {
         const response = await newUser.save();
 
         res.render('register', { message: 'success registration' });
-        res.redirect('/user/login');
+        res.redirect('/login');
         // create a new payload data object
         // const payload = {
         //     id: response.id,

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>data Table</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    td img {
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    td,
+    th {
+      font-size: 14px;
+    }
+
+    .no-data {
+      text-align: center;
+      color: #888;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>
+    <a href="/dashboard">Go to DashBoard</a>
+  </h3>
+  <h1>Candidate Lists</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Party</th>
+        <th>Age</th>
+        <th>Image</th>
+        <th>Vote</th>
+        <!-- <th>Vote</th>
+        <th>Vote Count</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <% if (data.length > 0) { %>
+      <% for (let i = 0; i < data.length; i++) { %>
+      <tr>
+
+        <td><%= data[i]['name'] %></td>
+        <td><%= data[i]['party'] %></td>
+        <td><%= data[i]['age'] %></td>
+        <td><img src="<%= data[i]['image'] %>" alt=""></td>
+        <td> <button type="button" class="btn btn-info" style="margin-left:20px">
+            <a href="/vote/<%= data[i]['_id']%>" style="text-decoration: none;color:#ccc" id="getid" data-id="<%= data[i]['_id']%>">
+              Give Vote
+
+            </a>
+
+          </button></td>
+      </tr>
+      <% } %>
+      <% } else { %>
+      <tr>
+        <td colspan="6" class="no-data">No data found.</td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <br><br>
+
+  
+  </script>
+</body>
+
+</html>

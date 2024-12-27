@@ -18,14 +18,18 @@
                             <img src="/image/man.jpeg" alt="Profile" class="avatar">
                         </div>
                     </div>
+                    
                 </div>
                 <h1 class="name"><%= user.name %></h1>
-                <p class="title">Candidate</p>
+                <p class="title">Voter</p>
                 <button class="edit-button">
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                     </svg>
                 </button>
+                <br>
+                <p><a href="/vote" style="text-decoration: none;"><h3>Let's check the Votes</h3></a></p>
+
             </div>
 
             <!-- Right Section -->
@@ -66,8 +70,15 @@
                         <div class="status-item">
                             <h3>Voting Status</h3>
                             <div class="status-indicator">
-                                <!-- <span class="status-dot voted"></span> -->
-                                <p><%= user.isVoted %></p>
+                                <% if(user.isVoted){%>
+                                <span class="status-dot voted"></span>
+                                <%}else{
+                                    
+                                    %>
+                                    <span class="status-dot not-voted"></span>
+                                    <% } %>
+
+                                 <p><%= user.isVoted %></p>
                             </div>
                         </div>
                     </div>
@@ -84,11 +95,16 @@
                 <div class="action-buttons">
                     <a href="/candidate" style=" text-decoration: none">
 
-                        <button class="forgot-password-btn" >
+                        <button class="forgot-password-btn1" >
                             
                             Vote
                         </button>
                     </a>
+                </div>
+                <div class="action-buttons">
+                    <a href="/logout" style=" text-decoration: none">
+
+                logout             </a>
                 </div>
             
 
